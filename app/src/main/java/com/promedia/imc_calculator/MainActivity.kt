@@ -69,11 +69,31 @@ class MainActivity : AppCompatActivity() {
         val s = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
         val sbLayout = s.view as Snackbar.SnackbarLayout
         val customLayout = layoutInflater.inflate(R.layout.toast, null)
+        var msj = when (IMC){
+            in 0.0..16.0 -> "Delgadez Severa"
+                in 16.01..16.99 -> "Delgadez Moderada"
+                in 17.00..18.49 -> "Delgadez Leve"
+                in 18.50..24.99 -> "Peso Normal"
+                in 25.00..29.99 -> "Preobesidad"
+                in 30.00..34.99 -> "Obesidad Leve"
+                in 35.00..40.00 -> "Obesidad Media"
+                in > 40.01 -> "Obesidad Mórbida"
+        }
+        var color = when (IMC){
+            in 0.0..16.0 -> R.color.dark_blue
+            in 16.01..16.99 -> R.color.blue
+            in 17.00..18.49 -> R.color.sky_blue
+            in 18.50..24.99 -> R.color.green
+            in 25.00..29.99 -> R.color.lima
+            in 30.00..34.99 -> R.color.cake_orange
+            in 35.00..40.00 -> R.color.orange
+            in > 40.01 -> R.color.red
+        }
 
-        customLayout!!.findViewById<TextView>(R.id.tvToastTitle).text = "VER TABLA"
+            customLayout!!.findViewById<TextView>(R.id.tvToastTitle).text = "VER TABLA"
 
-        sbLayout.addView(customLayout, 0)
-        s.setBackgroundTint(Color.YELLOW)
+        sbLayout.addView(customLayout}, 0)
+        s.setBackgroundTint(color)
         s.show()
     }
     fun alertDialog(view:View){
