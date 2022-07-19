@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">IMC_Calculator</string>
+    <string name="tvAltura">Altura</string>
+    <string name="tvPeso">Peso</string>
+    <string name="tv150_200">150/200</string>
+    <string name="tv75_150">75/150</string>
+    <string name="tvResultado">Resultado</string>
+    <string name="tvTablaIMC">TABLA IMC</string>
+    <string name="tvDelg_severa">Menos de 16.00: Delgadez Severa</string>
+    <string name="tvDelg_Mod">16.00 – 16.99: Delgadez Moderada</string>
+    <string name="tvDelg_Leve">17.00 – 18.49: Delgadez Leve</string>
+    <string name="tvPeso_Normal">18.50 – 24.99: Peso Normal</string>
+    <string name="tvPreOb">25.00 – 29.99: Preobesidad</string>
+    <string name="tvOb_Leve">30.00 – 34.99: Obesidad Leve</string>
+    <string name="tvOb_Med">35.00 – 40.00: Obesidad Media</string>
+    <string name="tvOb_morb">Más de 40.00: Obesidad mórbida</string>
+    <string name="tvAceptar">ACEPTAR</string>
+</resources>
