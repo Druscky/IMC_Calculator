@@ -1,15 +1,14 @@
-package com.p
+package com.promedia.imc_calculator
 
-import android.graphics.Color
 import android.widget.SeekBar
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
-import com.promedia.imc_calculator.R
 import com.promedia.imc_calculator.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -24,32 +23,50 @@ class MainActivity : AppCompatActivity() {
         setContentView(b.root)
 
         b.sBarAltura.setOnSeekBarChangeListener(object :
-            SeekBar.OnSeekBarChangeListener{
+            SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(
                 seek: SeekBar,
                 progress: Int,
-                fromUser: Boolean) {
+                fromUser: Boolean
+            ) {
                 b.tv150200.text = progress.toString().plus("/200")
                 height = progress
             }
+
             override fun onStartTrackingTouch(seek: SeekBar?) {}
-            override fun onStopTrackingTouch(seek: SeekBar?) {calcIMC()}
+            override fun onStopTrackingTouch(seek: SeekBar?) {
+                calcIMC()
+            }
         })
 
         b.sBarPeso.setOnSeekBarChangeListener(object :
-            SeekBar.OnSeekBarChangeListener{
+            SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(
                 seek: SeekBar,
                 progress: Int,
-                fromUser: Boolean) {
+                fromUser: Boolean
+            ) {
                 b.tv75150.text = progress.toString().plus("/150")
                 weight = progress
             }
+
             override fun onStartTrackingTouch(seek: SeekBar?) {}
-            override fun onStopTrackingTouch(seek: SeekBar?) {calcIMC()}
+            override fun onStopTrackingTouch(seek: SeekBar?) {
+                calcIMC()
+            }
         })
 
-//        b.imageView.setOnClickListener { showTable() }
+    //        b.imageView.setOnClickListener { showTable() }
+    }
+
+    fun alertCustom(view:View){
+        val inflater = this@MainActivity!!.layoutInflater
+        val custom_layout = inflater.inflate(R.layout.layout_dialog, null)
+
+        AlertDialog.Builder(this@MainActivity!!)
+            .setView(custom_layout)
+            .setPositiveButton(R.string.tvAceptar, null)
+            .show()
     }
 
     fun calcIMC() {
@@ -57,19 +74,11 @@ class MainActivity : AppCompatActivity() {
         IMC = Math.round((weight/doubleHeight)
             .times(100))
             .div(100.0)
-        b.tvResultado = IMC.toString()
+        b.tvResultado.text = IMC.toString()
         calcObesidad()
     }
     fun calcObesidad() {
-
-
-    }
-
-    fun mySnackBarCustom (view: View){
-        val s = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
-        val sbLayout = s.view as Snackbar.SnackbarLayout
-        val customLayout = layoutInflater.inflate(R.layout.toast, null)
-        var msj = when (IMC){
+        val msj = when (IMC){
             in 0.0..16.0 -> "Delgadez Severa"
                 in 16.01..16.99 -> "Delgadez Moderada"
                 in 17.00..18.49 -> "Delgadez Leve"
@@ -77,9 +86,9 @@ class MainActivity : AppCompatActivity() {
                 in 25.00..29.99 -> "Preobesidad"
                 in 30.00..34.99 -> "Obesidad Leve"
                 in 35.00..40.00 -> "Obesidad Media"
-                in > 40.01 -> "Obesidad Mórbida"
+                else -> "Obesidad Mórbida"
         }
-        var color = when (IMC){
+        val color = when (IMC){
             in 0.0..16.0 -> R.color.dark_blue
             in 16.01..16.99 -> R.color.blue
             in 17.00..18.49 -> R.color.sky_blue
@@ -87,22 +96,19 @@ class MainActivity : AppCompatActivity() {
             in 25.00..29.99 -> R.color.lima
             in 30.00..34.99 -> R.color.cake_orange
             in 35.00..40.00 -> R.color.orange
-            in > 40.01 -> R.color.red
+            else -> R.color.red
         }
 
-            customLayout!!.findViewById<TextView>(R.id.tvToastTitle).text = "VER TABLA"
-
-        sbLayout.addView(customLayout}, 0)
-        s.setBackgroundTint(color)
+        val s = Snackbar.make(b.root, msj, Snackbar.LENGTH_SHORT)
+        .setBackgroundTint(ContextCompat.getColor(this, color))
+        .setAction("Ver Tabla") { Toast.makeText(this@MainActivity, msj, Toast.LENGTH_SHORT).show() }
         s.show()
     }
-    fun alertDialog(view:View){
-        AlertDialog.Builder(view.context)
-            .setPositiveButton("Aceptar") { dialog, id -> /* Acción */ }
-            .show()
-
-    }
 }
+
+
+
+
 
 
 
