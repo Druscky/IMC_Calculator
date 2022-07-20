@@ -79,29 +79,30 @@ class MainActivity : AppCompatActivity() {
     }
     fun calcObesidad() {
         val msj = when (IMC){
-            in 0.0..16.0 -> "Delgadez Severa"
-                in 16.01..16.99 -> "Delgadez Moderada"
+            in 0.0..15.99 -> "Delgadez Severa"
+                in 16.00..16.99 -> "Delgadez Moderada"
                 in 17.00..18.49 -> "Delgadez Leve"
                 in 18.50..24.99 -> "Peso Normal"
                 in 25.00..29.99 -> "Preobesidad"
                 in 30.00..34.99 -> "Obesidad Leve"
-                in 35.00..40.00 -> "Obesidad Media"
+                in 35.00..39.99 -> "Obesidad Media"
                 else -> "Obesidad Mórbida"
         }
         val color = when (IMC){
-            in 0.0..16.0 -> R.color.dark_blue
-            in 16.01..16.99 -> R.color.blue
+            in 0.0..15.99 -> R.color.dark_blue
+            in 16.00..16.99 -> R.color.blue
             in 17.00..18.49 -> R.color.sky_blue
             in 18.50..24.99 -> R.color.green
             in 25.00..29.99 -> R.color.lima
             in 30.00..34.99 -> R.color.cake_orange
-            in 35.00..40.00 -> R.color.orange
+            in 35.00..39.99 -> R.color.orange
             else -> R.color.red
         }
 
         val s = Snackbar.make(b.root, msj, Snackbar.LENGTH_SHORT)
         .setBackgroundTint(ContextCompat.getColor(this, color))
-        .setAction("Ver Tabla") { Toast.makeText(this@MainActivity, msj, Toast.LENGTH_SHORT).show() }
+        .setTextColor(ContextCompat.getColor(this, R.color.black))
+        .setAction("Ver Tabla") { Toast.makeText(this, "Debería de ir a la tabla", Toast.LENGTH_SHORT).show() }
         s.show()
     }
 }

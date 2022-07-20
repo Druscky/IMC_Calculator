@@ -16,4 +16,7 @@
     <string name="tvOb_morb">Más de 40.00: Obesidad mórbida</string>
     <string name="tvAceptar">ACEPTAR</string>
     <string name="tvVer_Tabla">VER TABLA</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
