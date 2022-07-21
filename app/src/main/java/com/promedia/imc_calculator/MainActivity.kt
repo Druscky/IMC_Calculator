@@ -101,9 +101,13 @@ class MainActivity : AppCompatActivity() {
 
         val s = Snackbar.make(b.root, msj, Snackbar.LENGTH_SHORT)
         .setBackgroundTint(ContextCompat.getColor(this, color))
-        .setTextColor(ContextCompat.getColor(this, R.color.black))
-        .setAction("Ver Tabla") { Toast.makeText(this, "Debería de ir a la tabla", Toast.LENGTH_SHORT).show() }
+        .setTextColor(ContextCompat.getColor(this, R.color.dark_gray))
+        .setAction("Ver Tabla") { showTable() }
         s.show()
+    }
+    fun showTable(){
+        val dialog = TablaIMC_Fragment()
+        dialog.show(supportFragmentManager, "TablaPeso")
     }
 }
 
